@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Character Forge</title>
+  <meta name="description" content="A 5e-compatible character builder in the browser, built on the SRD 5.1: guided steps from abilities to spells, a live rules engine, and a printable character sheet. Works offline, nothing is uploaded.">
+  <meta name="theme-color" content="#241a12">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon-192.png">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="stylesheet" href="css/app.css">
+  <link rel="stylesheet" href="css/sheet.css">
+  <script>try { const u = JSON.parse(localStorage.getItem('cf:ui') || '{}'); document.documentElement.dataset.theme = u.theme || 'parchment'; } catch { document.documentElement.dataset.theme = 'parchment'; }</script>
+</head>
+<body>
+  <header class="top">
+    <div class="brand"><span class="mark" aria-hidden="true">⚒</span><h1 data-i18n="app.title">Character Forge</h1></div>
+    <p class="tagline" data-i18n="app.tagline"></p>
+    <div class="top-actions">
+      <label class="field"><span data-i18n="chars.title">Characters</span><select id="char-select" aria-label="Character"></select></label>
+      <button class="tb" id="btn-new" data-i18n="chars.new">New character</button>
+      <button class="tb" id="btn-export" data-i18n="chars.export">Export</button>
+      <button class="tb" id="btn-import" data-i18n="chars.import">Import</button>
+      <button class="tb danger" id="btn-del" data-i18n="chars.del">Delete</button>
+      <label class="field"><span data-i18n="set.theme">Theme</span><select id="set-theme" aria-label="Theme">
+        <option value="parchment" data-i18n="theme.parchment">Parchment</option>
+        <option value="gothic" data-i18n="theme.gothic">Gothic</option>
+        <option value="cyber" data-i18n="theme.cyber">Neon</option>
+      </select></label>
+      <label class="field"><span data-i18n="set.lang">Language</span><select id="set-lang" aria-label="Language"><option value="en">English</option><option value="tr">Türkçe</option></select></label>
+    </div>
+    <input type="file" id="file-import" accept="application/json,.json" hidden>
+  </header>
+
+  <nav class="tabs" id="tabs" aria-label="Steps"></nav>
+
+  <div class="work">
+    <main class="main" id="main"></main>
+    <aside class="side">
+      <section class="panel" id="summary"></section>
+      <section class="panel todo" id="todo"></section>
+    </aside>
+  </div>
+
+  <footer class="foot"><span data-i18n="foot.srd"></span> <a href="https://github.com/ardakalper/character-forge" data-i18n="foot.source">Source on GitHub</a></footer>
+  <div class="toast" id="toast" hidden role="status"></div>
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
